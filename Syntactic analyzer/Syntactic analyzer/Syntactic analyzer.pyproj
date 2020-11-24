@@ -21,7 +21,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FragmentedAnalyzer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GraphematicAnalyzer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MorphologicalAnalyzer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SyntacticAnalyzer.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Syntactic_analyzer.py" />

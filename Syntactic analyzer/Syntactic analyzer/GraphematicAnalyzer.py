@@ -30,16 +30,16 @@ class GraphematicAnalyzer:
         resultTable = [("",["BTxt"])] #Begining of the text
 
         #Auxilliary stuff
-        rusLetPattern = r"[а-яА-ЯёЁ]"
-        latLetPattern = r"[a-zA-Z]"
+        rusLetPattern = r"^[а-яА-ЯёЁ]+$"
+        latLetPattern = r"^[a-zA-Z]+$"
         dividers = [" ", "*", "=", "\n"]
-        numPattern = r"[0-9]"
+        numPattern = r"^[0-9]+$"
         spacesPattern = r"\s+"
-        smallLettsPattern = r"[a-zа-яё]"
-        bigLettsPattern = r"[A-ZА-ЯЁ]"
+        smallLettsPattern = r"^[a-zа-яё]+$"
+        bigLettsPattern = r"^[A-ZА-ЯЁ]+$"
         floatPattern = r"^\d+\.\d+$"
 
-        #Adding descriptions
+        #Adding descriptors
         for para in paragraphs:
             sentences = self.divideIntoSentences(para)
 
@@ -59,7 +59,7 @@ class GraphematicAnalyzer:
                         descripList.append("OPun")
                     if re.search(numPattern, words[i]):
                         descripList.append("ODg")
-                    if words[i].isalnum() and contatinsLetter(words[i]) and containsDig(words[i]):
+                    if words[i].isalnum() and self.contatinsLetter(words[i]) and self.containsDigit(words[i]):
                         descripList.append("ODgCh")
                     if len(descripList) == 0:
                         descripList.append("OUnk")
@@ -110,6 +110,19 @@ class GraphematicAnalyzer:
 
         return resultTable
 
+    #Takes the text of string type, returns the list of sentences. Each sentence is a list of words
+    def divideIntoSentsAndWords(self, text):
+        graphAnResult = []
+
+        #Разбиваем текст на предложения
+        sentences = sent_tokenize(text)
+        #Разбиваем каждое предложение на слова
+        for sent in sentences:
+            #Добавляем разделенное на слова предложение в результирующий список
+            graphAnResult.append(word_tokenize(sent))
+
+        return graphAnResult
+
 #=======================================Auxillary methods====================================
     def consistsOfSameSymbs(self, word):
         if len(word) <= 1:
@@ -120,8 +133,14 @@ class GraphematicAnalyzer:
                 return False
         return True
 
-    def contatinsLetter(self, words):
+    def contatinsLetter(self, word):
         for letter in word:
             if letter.isalpha():
+                return True
+        return False
+
+    def containsDigit(self, word):
+        for letter in word:
+            if letter.isdigit():
                 return True
         return False
