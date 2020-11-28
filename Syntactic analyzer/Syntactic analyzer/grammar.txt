@@ -1,0 +1,4 @@
+S -> NP VP
+
+NP -> NOUN | ADJF NOUN
+VP -> VERB NP | VERB 

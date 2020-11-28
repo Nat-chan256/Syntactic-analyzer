@@ -7,17 +7,17 @@ import string
 class GraphematicAnalyzer:
 
     #Takes the text of string type, returns the list of paragraphs
-    def divideIntoParagraphs(self, text):
+    def paragraphs(self, text):
         paragraphs = text.split("\n")
         return paragraphs
 
     #Takes the text of string type, returns the list of sentences
-    def divideIntoSentences(self, text):
+    def sentences(self, text):
         sentencesList = sent_tokenize(text)
         return sentencesList
 
     #Takes the text of string type, returns the list of words
-    def divideIntoWords(self, text, includeSpaces = False):
+    def words(text, includeSpaces = False):
         if includeSpaces:
             ll = [[word_tokenize(w), ' '] for w in text.split()]
             return list(itertools.chain(*list(itertools.chain(*ll))))
@@ -26,7 +26,7 @@ class GraphematicAnalyzer:
 
     #Takes the text of string type, returns the list of tuples: (token, list of descriptors)
     def createTableWithDescriptors(self, text):
-        paragraphs = self.divideIntoParagraphs(text)
+        paragraphs = self.paragraphs(text)
         resultTable = [("",["BTxt"])] #Begining of the text
 
         #Auxilliary stuff
@@ -41,10 +41,10 @@ class GraphematicAnalyzer:
 
         #Adding descriptors
         for para in paragraphs:
-            sentences = self.divideIntoSentences(para)
+            sentences = self.sentences(para)
 
             for j in range(len(sentences)):
-                words = self.divideIntoWords(sentences[j], True)
+                words = self.words(sentences[j], True)
 
                 for i in range(len(words)):
                     descripList = []
@@ -111,7 +111,7 @@ class GraphematicAnalyzer:
         return resultTable
 
     #Takes the text of string type, returns the list of sentences. Each sentence is a list of words
-    def divideIntoSentsAndWords(self, text):
+    def sentsAndWords(self, text):
         graphAnResult = []
 
         #Разбиваем текст на предложения

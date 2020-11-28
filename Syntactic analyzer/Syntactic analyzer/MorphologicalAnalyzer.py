@@ -2,7 +2,7 @@ from pymorphy2 import MorphAnalyzer
 
 class MorphologicalAnalyzer:
 
-    def analyzeWord(self, word):
+    def analyzeWord(word):
         morph = MorphAnalyzer()
 
         p = morph.parse(word)[0]

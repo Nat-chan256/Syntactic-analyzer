@@ -1,18 +1,12 @@
-from GraphematicAnalyzer import GraphematicAnalyzer
+from SyntacticAnalyzer import SynatcticAnalyzer
 
 FILE_NAME = "Test files\\" + "Samples.txt"
 
-
 try:
-    file = open(FILE_NAME, encoding="utf8")
-    text = file.read()
-   
-    graphAnalyzer = GraphematicAnalyzer()
-    tokens = graphAnalyzer.createTableWithDescriptors(text)
-    
-    for token in tokens:
-        print(token)
+    parserResult = SynatcticAnalyzer.analyzeSentence("Мама мыла грязную раму")
 
-    file.close()
+    for tree in parserResult:
+        print(tree)
+
 except FileNotFoundError:
     print("The file does not exist")
