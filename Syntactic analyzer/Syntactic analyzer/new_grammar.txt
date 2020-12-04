@@ -1,6 +1,6 @@
 S -> NP VP
-
 NP -> NOUN | ADJF NOUN
 VP -> VERB NP | VERB 
-NOUN -> 'Мама' | 'мыла' | 'раму'
+NOUN -> 'Мама' | 'мыла' | 'мыла' | 'мыла' | 'раму' | 'раму'
+VERB -> 'мыла'
 ADJF -> 'грязную'

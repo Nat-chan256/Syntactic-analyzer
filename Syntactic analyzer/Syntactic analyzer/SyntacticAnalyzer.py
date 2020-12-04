@@ -26,11 +26,11 @@ class SynatcticAnalyzer:
             #Collect words to be written to the new grammar file
             posDict = {}
             for word in sent:
-                analysisResult = MorphologicalAnalyzer.analyzeWord(word)
-                if analysisResult['часть речи'] in posDict.keys():
-                    posDict[analysisResult['часть речи']].append(word)
-                else:
-                    posDict[analysisResult['часть речи']] = [word]
+                for analysisResult in MorphologicalAnalyzer.analyzeWord(word):
+                    if analysisResult['часть речи'] in posDict.keys():
+                        posDict[analysisResult['часть речи']].append(word)
+                    else:
+                        posDict[analysisResult['часть речи']] = [word]
 
             #Write collected words to the new grammar file
             for pos in posDict.keys():
@@ -49,8 +49,9 @@ class SynatcticAnalyzer:
             f.close()
 
             #Build trees for each sentence
-            grammar = nltk.CFG.fromstring(g)
-            rd_parser = nltk.RecursiveDescentParser(grammar)
+            grammar = nltk.CFG.fromstring(g) 
+            #rd_parser = nltk.RecursiveDescentParser(grammar)
+            rd_parser = nltk.ChartParser(grammar)
             return rd_parser.parse(sent)
 
         except Exception as ex:

@@ -1,4 +1,5 @@
-S -> NP VP
-
+S -> NP VP | AdjP VP | NP AdjP
 NP -> NOUN | ADJF NOUN
 VP -> VERB NP | VERB 
+AdjP -> ADJF
+PrtfP -> PRTF
