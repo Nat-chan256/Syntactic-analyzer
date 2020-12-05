@@ -17,12 +17,13 @@ class GraphematicAnalyzer:
         return sentencesList
 
     #Takes the text of string type, returns the list of words
-    def words(text, includeSpaces = False):
-        if includeSpaces:
-            ll = [[word_tokenize(w), ' '] for w in text.split()]
-            return list(itertools.chain(*list(itertools.chain(*ll))))
+    def words(self, text, withPunct = True):
+        result = word_tokenize(text)
       
-        return word_tokenize(text)
+        if not withPunct:
+            result = [w for w in result if w not in string.punctuation]
+
+        return result
 
     #Takes the text of string type, returns the list of tuples: (token, list of descriptors)
     def createTableWithDescriptors(self, text):

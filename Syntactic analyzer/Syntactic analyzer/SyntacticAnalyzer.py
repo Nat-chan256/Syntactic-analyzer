@@ -8,7 +8,8 @@ class SynatcticAnalyzer:
 
     #Takes a text of string type, returns parse tree (or trees) 
     def analyzeSentence(sentence):
-        sent = GraphematicAnalyzer.words(sentence)
+        graphAn = GraphematicAnalyzer()
+        sent = graphAn.words(sentence, False)
         #Create grammar file with words from the sentence
         try:
             GRAMMAR_FILE_NAME = "grammar.txt"
@@ -25,15 +26,19 @@ class SynatcticAnalyzer:
                 
             #Collect words to be written to the new grammar file
             posDict = {}
+            morphAn = MorphologicalAnalyzer()
             for word in sent:
-                for analysisResult in MorphologicalAnalyzer.analyzeWord(word):
+                for analysisResult in morphAn.analyzeWord(word):
                     if analysisResult['часть речи'] in posDict.keys():
-                        posDict[analysisResult['часть речи']].append(word)
+                        if not word in posDict[analysisResult['часть речи']]: #Check if the word is not in dictionary already
+                            posDict[analysisResult['часть речи']].append(word)
                     else:
                         posDict[analysisResult['часть речи']] = [word]
 
             #Write collected words to the new grammar file
             for pos in posDict.keys():
+                if pos == None: 
+                    continue 
                 curStr = pos + " -> ";
                 for i in range(len(posDict[pos]) - 1):
                     curStr += "'" + posDict[pos][i] + "'" + " | "

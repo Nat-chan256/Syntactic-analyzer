@@ -4,7 +4,7 @@ class MorphologicalAnalyzer:
 
     #Returns the list of several analysis results
     #where each result is represented as a dictionary
-    def analyzeWord(word):
+    def analyzeWord(self, word):
         morph = MorphAnalyzer()
         analysisResults = []
 
