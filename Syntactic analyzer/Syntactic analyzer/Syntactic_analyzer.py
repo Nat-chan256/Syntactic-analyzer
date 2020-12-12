@@ -17,7 +17,7 @@ try:
         draw_trees(*(tree for tree in parserResult))
 
     #morph = MorphologicalAnalyzer()
-    #for a in morph.analyzeWord("прибрано"):
+    #for a in morph.analyzeWord("кругом"):
     #    print(a['часть речи'])
     
 except FileNotFoundError:
